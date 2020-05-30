@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.myapplication.mainFragment"
+        android:label="mainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_viewBalance"
+            app:destination="@id/viewBalance" />
+        <action
+            android:id="@+id/action_mainFragment_to_specifyAmount"
+            app:destination="@id/specifyAmount" />
+        <action
+            android:id="@+id/action_mainFragment_to_viewTransaction"
+            app:destination="@id/viewTransaction" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseRecipient"
+        android:name="com.example.myapplication.chooseRecipient"
+        android:label="chooseRecipient"
+        tools:layout="@layout/fragment_choose_recipient">
+        <action
+            android:id="@+id/action_chooseRecipient_to_confirmMoneySent"
+            app:destination="@id/confirmMoneySent" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmMoneySent"
+        android:name="com.example.myapplication.confirmMoneySent"
+        android:label="confirmMoneySent"
+        tools:layout="@layout/fragment_confirm_money_sent"/>
+    <fragment
+        android:id="@+id/viewBalance"
+        android:name="com.example.myapplication.viewBalance"
+        android:label="viewBalance"
+        tools:layout="@layout/fragment_view_balance"/>
+    <fragment
+        android:id="@+id/viewTransaction"
+        android:name="com.example.myapplication.viewTransaction"
+        android:label="viewTransaction"
+        tools:layout="@layout/fragment_view_transaction"/>
+    <fragment
+        android:id="@+id/specifyAmount"
+        android:name="com.example.myapplication.specifyAmount"
+        android:label="specifyAmount"
+        tools:layout="@layout/fragment_specify_amount">
+        <action
+            android:id="@+id/action_specifyAmount_to_chooseRecipient"
+            app:destination="@id/chooseRecipient" />
+    </fragment>
+</navigation>
