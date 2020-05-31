@@ -1,15 +1,20 @@
 package com.example.myapplication;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import com.google.android.material.snackbar.Snackbar;
 
 
 /**
@@ -36,8 +41,27 @@ public class specifyAmount extends Fragment {
         view.findViewById(R.id.send_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = specifyAmountDirections.actionSpecifyAmountToChooseRecipient();
-                Navigation.findNavController(v).navigate(action);
+
+                EditText amtSent = (EditText) getView().findViewById(R.id.input_amount);
+                try{
+                    float amount = Float.parseFloat(amtSent.getText().toString());
+                    NavDirections action = specifyAmountDirections.actionSpecifyAmountToChooseRecipient(amount);
+                    Navigation.findNavController(v).navigate(action);
+                }catch(NumberFormatException exception){
+                    Log.d("NumberFormatException: ", exception.toString());
+                    Snackbar snackbar = Snackbar.make(v, "Invalid amount!", Snackbar.LENGTH_LONG);
+                    snackbar.setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+                    snackbar.setActionTextColor(Color.RED);
+                    snackbar.show();
+                }
+
+
+
 
             }
         });
@@ -45,6 +69,7 @@ public class specifyAmount extends Fragment {
         view.findViewById(R.id.cancel_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 NavDirections action = specifyAmountDirections.actionSpecifyAmountToMainFragment();
                 Navigation.findNavController(v).navigate(action);
 

@@ -7,9 +7,14 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 
 /**
@@ -33,11 +38,34 @@ public class chooseRecipient extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
+        final TextView viewAmount = view.findViewById(R.id.viewMoney);
+        final float amount = chooseRecipientArgs.fromBundle(getArguments()).getAmount();
+        viewAmount.setText("Sending amount: "+amount);
+
+
         view.findViewById(R.id.next_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = chooseRecipientDirections.actionChooseRecipientToConfirmMoneySent();
-                Navigation.findNavController(v).navigate(action);
+                try {
+                    EditText recipient = (EditText)getView().findViewById(R.id.input_recipient);
+                    String recipientName = recipient.getText().toString();
+                    NavDirections action = chooseRecipientDirections.actionChooseRecipientToConfirmMoneySent(recipientName, amount);
+                    Navigation.findNavController(v).navigate(action);
+
+
+                }catch (Exception exception){
+                    Log.d("Exception: ", exception.toString());
+                    Snackbar snackbar = Snackbar.make(v, "Invalid name!", Snackbar.LENGTH_LONG);
+                    snackbar.setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+
+
+                }
+
             }
         });
         view.findViewById(R.id.cancel_btn).setOnClickListener(new View.OnClickListener() {

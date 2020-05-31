@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_viewBalance"
-            app:destination="@id/viewBalance" />
+            app:destination="@id/viewBalance"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit" />
         <action
             android:id="@+id/action_mainFragment_to_specifyAmount"
             app:destination="@id/specifyAmount" />
@@ -31,12 +33,22 @@
         <action
             android:id="@+id/action_chooseRecipient_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="amount"
+            app:argType="float" />
     </fragment>
     <fragment
         android:id="@+id/confirmMoneySent"
         android:name="com.example.myapplication.confirmMoneySent"
         android:label="confirmMoneySent"
-        tools:layout="@layout/fragment_confirm_money_sent"/>
+        tools:layout="@layout/fragment_confirm_money_sent">
+        <argument
+            android:name="recipientName"
+            app:argType="string" />
+        <argument
+            android:name="moneySent"
+            app:argType="float" />
+    </fragment>
     <fragment
         android:id="@+id/viewBalance"
         android:name="com.example.myapplication.viewBalance"
