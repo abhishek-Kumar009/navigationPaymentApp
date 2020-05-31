@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAGMenu = "Menu Item pressed:";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,30 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.settingsOption:
+                Log.d(TAGMenu, "settings option was pressed!");
+                return true;
+            case R.id.favoriteOption:
+                Log.d(TAGMenu, "Favorite option was pressed!");
+                return true;
+            case R.id.profileOption:
+                Log.d(TAGMenu, "Profile option was pressed!");
+                return true;
+            case R.id.logoutOption:
+                Log.d(TAGMenu, "Logout option was pressed!");
+                return true;
+            case R.id.app_bar_search:
+                Log.d(TAGMenu, "Search button was pressed!");
+                return true;
+
+                default:
+                    return super.onOptionsItemSelected(item);
+        }
 
     }
 }
