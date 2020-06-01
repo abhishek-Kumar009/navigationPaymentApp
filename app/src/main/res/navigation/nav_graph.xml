@@ -71,4 +71,8 @@
             android:id="@+id/action_specifyAmount_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.myapplication.Login"
+        android:label="Login" />
 </navigation>

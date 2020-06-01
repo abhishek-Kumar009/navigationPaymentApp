@@ -46,25 +46,23 @@ public class chooseRecipient extends Fragment {
         view.findViewById(R.id.next_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
+
                     EditText recipient = (EditText)getView().findViewById(R.id.input_recipient);
                     String recipientName = recipient.getText().toString();
-                    NavDirections action = chooseRecipientDirections.actionChooseRecipientToConfirmMoneySent(recipientName, amount);
-                    Navigation.findNavController(v).navigate(action);
+                    if(!recipientName.isEmpty()){
+                        NavDirections action = chooseRecipientDirections.actionChooseRecipientToConfirmMoneySent(recipientName, amount);
+                        Navigation.findNavController(v).navigate(action);
+                    }else{
+                        Snackbar snackbar = Snackbar.make(v, "Invalid name!", Snackbar.LENGTH_LONG);
+                        snackbar.setAction("RETRY", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
+                            }
+                        });
+                        snackbar.show();
+                    }
 
-                }catch (Exception exception){
-                    Log.d("Exception: ", exception.toString());
-                    Snackbar snackbar = Snackbar.make(v, "Invalid name!", Snackbar.LENGTH_LONG);
-                    snackbar.setAction("RETRY", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                        }
-                    });
-
-
-                }
 
             }
         });
