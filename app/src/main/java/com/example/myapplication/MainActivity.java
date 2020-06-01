@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
+        super.onOptionsItemSelected(item);
         switch (item.getItemId()){
             case R.id.settingsOption:
                 Log.d(TAGMenu, "settings option was pressed!");
@@ -41,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAGMenu, "Logout option was pressed!");
                 return true;
             case R.id.app_bar_search:
-                Log.d(TAGMenu, "Search button was pressed!");
+                MenuItem searchItem = findViewById(R.id.app_bar_search);
+                SearchView searchView = (SearchView) searchItem.getActionView();
+                //Add event listeners here to search items in the app
+
+
                 return true;
 
                 default:

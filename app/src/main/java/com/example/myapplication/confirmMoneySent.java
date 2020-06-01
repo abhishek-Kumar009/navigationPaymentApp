@@ -3,7 +3,9 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +40,15 @@ public class confirmMoneySent extends Fragment {
 
             TextView confirmationMessage = (TextView)getView().findViewById(R.id.confirmation_message);
             confirmationMessage.setText("$"+amount + " was sent to "+recipientName);
+
+            //Back button takes to the main fragment
+            requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    Navigation.findNavController(getView()).popBackStack(R.id.mainFragment, false);
+                }
+            });
+
 
         }catch (Exception e){
             Log.d("Exception", e.toString());
